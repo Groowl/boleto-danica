@@ -1,0 +1,47 @@
+
+route-empresa;company
+route-produtos;products
+route-suporte;support
+route-downloads;downloads
+route-faq;faq
+route-ondeEncontrar;where-to-buy
+route-noticias;news
+route-contato;contact
+route-politicaDePrivacidade;privacy-policy
+route-termosDeUso;terms-of-use
+
+menu-empresa;Company
+menu-produtos;Products
+menu-suporte;Support
+menu-downloads;Downloads
+menu-faq;FAQ
+menu-ondeEncontrar;Where to Buy
+menu-noticias;News
+menu-contato;Contact
+menu-politicaDePrivacidade;Privacy Policy
+menu-termosDeUso;Terms of Use
+
+
+emailAddressInvalid;Tipo de variável inválida, deve ser string
+emailAddressInvalidFormat;'%value%' não é um e-mail válido
+emailAddressInvalidHostname;'%hostname%' não é host válido para o e-mail '%value%'
+emailAddressInvalidMxRecord;'%hostname%' não parece ter MX record para o endereço de e-mail '%value%'
+emailAddressDotAtom;'%localPart%' não casou com formato dot-atom 
+emailAddressQuotedString;'%localPart%' não casou com formato quoted-string
+emailAddressInvalidLocalPart;'%localPart%' não é uma parte local válida para o e-mail '%value%'
+emailAddressLengthExceeded;'%value%' é muito grande
+isEmpty;Campo obrigatório deve ser preenchido
+notEmptyInvalid;Campo obrigatório deve ser preenchido
+fileUploadErrorNoFile;Você não selecionou nenhum arquivo
+fileUploadErrorExtension;A extensão do arquivo não é válida, somente é permitido jpg, png e gif
+
+fileSizeTooBig;O tamanho máximo do arquivo '%value%' é '%max%' mas seu arquivo tem '%size%'
+fileSizeTooSmall;O tamanho mínimo do arquivo '%value%' é '%max%' mas seu arquivo tem '%size%'
+fileSizeNotFound;O arquivo '%value%' não foi encontrado
+
+fileImageSizeWidthTooBig;A largura máxima permitada para imagem é %maxwidth%px mas a sua imagem tem %width%px
+fileImageSizeWidthTooSmall;A largura mínima permitada para imagem é %minwidth%px mas a sua imagem tem %width%px
+fileImageSizeHeightTooBig;A altura máxima permitada para imagem é %maxheight%px mas a sua imagem tem %height%px
+fileImageSizeHeightTooSmall;A altura mínima permitada para imagem é %minheight%px mas a sua imagem tem %height%px
+fileImageSizeNotDetected;O tamanho da imagem '%value%' não pode ser detectado
+fileImageSizeNotReadable;O arquivo '%value%' não pode ser lido

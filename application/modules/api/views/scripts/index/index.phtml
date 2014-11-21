@@ -1,0 +1,77 @@
+<div class="container">
+    <h1>Meus Boletos</h1>
+
+    <div class="row">
+        <div class="filtros col-md-6">
+            <a href="/" class="btn btn-default">Todos</a>
+            <a href="/?<?php echo (Zend_Controller_Front::getInstance()->getRequest()->getParam('busca') != '') ? 'busca='.Zend_Controller_Front::getInstance()->getRequest()->getParam('busca').'&' : ''; ?>status=vencendo" class="btn btn-warning">Vencendo</a>
+            <a href="/?<?php echo (Zend_Controller_Front::getInstance()->getRequest()->getParam('busca') != '') ? 'busca='.Zend_Controller_Front::getInstance()->getRequest()->getParam('busca').'&' : ''; ?>status=pendente" class="btn btn-primary">Pendentes</a>
+            <a href="/?<?php echo (Zend_Controller_Front::getInstance()->getRequest()->getParam('busca') != '') ? 'busca='.Zend_Controller_Front::getInstance()->getRequest()->getParam('busca').'&' : ''; ?>status=pago" class="btn btn-success">Pagos</a>
+            <a href="/?<?php echo (Zend_Controller_Front::getInstance()->getRequest()->getParam('busca') != '') ? 'busca='.Zend_Controller_Front::getInstance()->getRequest()->getParam('busca').'&' : ''; ?>status=vencido" class="btn btn-danger">Vencidos</a>
+        </div>
+        <div class="busca col-md-6">
+            <form action="/">
+                <div class="input-group">
+                <input type="hidden" name="status" value="<?php echo Zend_Controller_Front::getInstance()->getRequest()->getParam('status'); ?>">
+                    <input type="text" class="form-control" name="busca" placeholder="Documento, nome..." value="<?php echo Zend_Controller_Front::getInstance()->getRequest()->getParam('busca'); ?>">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br><br>
+</div>
+<div class="container">
+<?php if (count($this->rows) > 0): ?>
+    <table class="table table-striped data-table">
+        <tbody>
+            <?php foreach ($this->rows as $row): ?>
+                
+            <tr>
+                <td valign="middle" class="status status-<?php echo $row['status'] ?>">
+                    <small><?php echo ucfirst($row['status']) ?></small> <br>
+                    <strong><a target="_blank" href="/boletos/?nosso_numero=<?php echo $row['nosso_numero'] ?>">#<?php echo $row['numero_documento']; ?></a></strong> <br>
+                    <small>Venc.: <?php echo date('d/m/Y',strtotime($row['data_vencimento'])); ?></small>
+                </td>
+                <td class="dados">
+                    <div class="row">
+                        <div class="col-md-12">
+                            Código de Barras: <code><?php echo preg_replace('/[ \.]/', '', $row['linha_digitavel']); ?></code>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Documento:</strong> <?php echo $row['numero_documento']; ?> <br>
+                            <strong>Data:</strong> <?php echo date('d/m/Y',strtotime($row['data_documento'])); ?> <br>
+                            <strong>Nome:</strong> <?php echo $row['nome']; ?> (<small><?php echo $row['cnpj']; ?></small>)<br> 
+                            <strong>Nr Doc Banco:</strong> <?php echo $row['nosso_numero']; ?>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Valor:</strong> R$ <?php echo number_format(str_replace(',', '.', $row['valor']), 2, ',', ''); ?> <br>
+                            <strong>Vencimento:</strong> <?php echo date('d/m/Y',strtotime($row['data_vencimento'])); ?> <br>
+                            <strong>Banco:</strong> <?php echo $row['banco']; ?> <br>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </td>
+
+                    
+                <td valign="middle" width="100">
+                    <?php if ($row['status'] != 'pago'): ?>
+                        <a target="_blank" href="/boletos/?nosso_numero=<?php echo $row['nosso_numero'] ?>" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</a>
+                    <?php endif ?>
+                </td>
+                
+            </tr>
+
+            <?php endforeach ?>
+        </tbody>
+    </table>
+<?php else: ?>
+    <p>Nenhum boleto encontrado.</p>
+<?php endif ?>
+</div>

@@ -1,0 +1,63 @@
+<?php
+
+$frontControllerName = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+$frontActionName     = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+
+$this->headTitle('Danica Boleto')->setSeparator(' | ');
+
+$this->headMeta()->prependHttpEquiv('Content-Type','text/html; charset=UTF-8');
+$this->headMeta()->prependHttpEquiv('X-UA-Compatible','IE=edge');
+$this->headMeta()->prependHttpEquiv('content-language',strtolower(str_replace('_','-',Zend_Registry::get('Zend_Locale'))));
+
+// $this->headLink()->appendStylesheet($this->baseUrl('styles/default/reset.css'),'screen');
+// $this->headLink()->appendStylesheet($this->baseUrl('styles/default/layout.css'),'screen');
+// $this->headLink(array('rel' => 'shortcut icon','href' => $this->url(array(),'media-index') . 'styles/default/images/favicon.png'));
+// $this->headLink(array('rel' => 'canonical','href' => $this->url()));
+
+// $this->headScript()->appendFile($this->baseUrl('scripts/library/jquery/jquery-1.7.1.min.js'));
+// $this->headScript()->appendFile($this->baseUrl('scripts/library/jquery.animate.easing/jquery.easing.1.3.js'));
+// $this->headScript()->appendFile($this->baseUrl('scripts/library/jquery.masonry/jquery.masonry.min.js'));
+// $this->headScript()->appendFile($this->baseUrl('scripts/library/jquery.form.mask/jquery.meio.mask.min.js'));
+// $this->headScript()->appendFile($this->baseUrl('scripts/library/cufon/cufon-yui.js'));
+// $this->headScript()->appendFile($this->baseUrl('scripts/default/cufon/DTLNobelT_Light_300-DTLNobelT_Light_italic_300.font.js'));
+// $this->headScript()->appendFile($this->baseUrl('scripts/default/cufon/DTLNobelT_400.font.js'));
+// $this->headScript()->appendFile($this->baseUrl('js/library.js'));
+// $this->headScript()->appendFile($this->baseUrl('build/JST.js'));
+// $this->headScript()->appendFile($this->baseUrl('build/min.js'));
+$this->headLink()->appendStylesheet($this->baseUrl('css/font-awesome.min.css'),'screen');
+$this->headLink()->appendStylesheet($this->baseUrl('css/main.css'),'screen');
+
+
+
+?>
+<!DOCTYPE html>
+<html ng-app='app'lang="pt-BR">
+
+	<head>
+		<?php 
+		echo $this->headTitle()->toString() . "\r\n";
+		echo $this->headMeta()->toString() . "\r\n";
+		echo (APPLICATION_ENV == 'development'  ? $this->headLink()->toString() : $this->compressStyle()) . "\r\n";
+		echo $this->navigation()->setRole('Guest')->links();
+		?>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	</head>
+
+	<body class="login">
+		
+
+    	<div class="container">
+			<?php echo $this->layout()->content ?>
+		</div>
+
+	  	<?php echo (APPLICATION_ENV == 'development'  ? $this->headScript()->toString() :  $this->compressScript()) . "\r\n"; ?>
+	</body>
+</html>
+
