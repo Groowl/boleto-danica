@@ -1,0 +1,83 @@
+<div class="container">
+    <h1>Usuários</h1>
+
+
+    <table class="table table-striped data-table">
+    	<thead>
+    		<tr>
+    			<th>Nome</th>
+    			<th>E-mail</th>
+    			<th>Cidade/Estado</th>
+    			<th width="100"></th>
+    		</tr>
+    	</thead>
+        <tbody>
+			<?php foreach ($this->rows as $k => $row): ?>
+				<tr>
+					<td><a href="" data-toggle="modal" data-target="#myModal<?php echo $k; ?>" title="Alterar Senha"><?php echo $row['nome'] ?></a></td>
+					<td><a href="" data-toggle="modal" data-target="#myModal<?php echo $k; ?>" title="Alterar Senha"><?php echo $row['email'] ?></a></td>
+					<td><?php echo $row['cidade'].'/'.$row['estado'] ?></td>
+					<td>
+						<a data-toggle="modal" data-target="#myModal<?php echo $k; ?>" href="" title="Alterar Senha" class="btn btn-info btn-sm">Alterar Senha</a>
+						<!-- Modal -->
+						<div class="modal fade" id="myModal<?php echo $k; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+					        	<form action="/usuarios/alterar-senha" class="form-usuario">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						        <h4 class="modal-title" id="myModalLabel">Alterar Dados</h4>
+						      </div>
+						      <div class="modal-body">
+								  <div class="form-group">
+								    <label for="">E-mail</label> <br>
+								    <code><?php echo $row['email'] ?></code>
+								    <input type="hidden" name="email" class="form-usuario-email" value="<?php echo $row['email'] ?>">
+								  </div>
+								  <div class="form-group">
+								    <label for="nome">Nome</label>
+								    <input type="text" class="form-control form-usuario-nome" name="nome" required placeholder="Nome" value="<?php echo $row['nome'] ?>">
+								  </div>
+								  <div class="form-group">
+									  	<div style="display: inline-block; width: 59%">
+									    <label for="nome">Cidade</label>
+									    <input type="text" class="form-control form-usuario-cidade" name="cidade" required placeholder="Cidade" value="<?php echo $row['cidade'] ?>">
+								    </div>
+									  	<div style="display: inline-block; width: 39%">
+									    <label for="estado">Estado</label>
+									    <input type="text" class="form-control form-usuario-estado" name="estado" required placeholder="Estado" value="<?php echo $row['estado'] ?>">
+								    </div>
+								  </div>
+								  <?php if ($this->tipo == 'admin'): ?>
+								  <div class="form-group">
+								    <label for="tipo">Tipo de usuário</label> <br>
+								    <select name="tipo" class="form-usuario-tipo">
+								    	<option value="member" <?php echo $row['tipo'] == 'member' ? 'selected' : '' ?>>Usuário</option>
+								    	<option value="admin" <?php echo $row['tipo'] == 'admin' ? 'selected' : '' ?>>Administrador</option>
+								    </select>
+								  </div>
+								  <?php endif ?>
+								  <div class="form-group">
+								    <label for="senha">Nova Senha</label>
+								    <input type="password" class="form-control form-usuario-senha"  name="senha" placeholder="Nova Senha">
+								  </div>
+								  <div class="form-group">
+								    <label for="nova-senha">Repita Nova Senha</label>
+								    <input type="password" class="form-control form-usuario-nova-senha"   name="nova-senha" placeholder="Repita Nova Senha">
+								  </div>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						        <button type="submit" class="btn btn-primary">Salvar</button>
+						      </div>
+								</form>
+						    </div>
+						  </div>
+						</div>
+
+					</td>
+				</tr>
+			<?php endforeach ?>
+        </tbody>
+    </table>
+</div>

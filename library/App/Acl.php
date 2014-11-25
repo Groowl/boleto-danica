@@ -18,6 +18,8 @@ class App_Acl extends Zend_Acl
 		$this->add(new Zend_Acl_Resource('api-sessao-login'));
 		$this->add(new Zend_Acl_Resource('api-sessao-logout'));
 		$this->add(new Zend_Acl_Resource('api-boletos'));
+		$this->add(new Zend_Acl_Resource('api-usuarios'));
+		$this->add(new Zend_Acl_Resource('api-usuarios-index'));
 		$this->add(new Zend_Acl_Resource('api-boletos-index'));
 		$this->add(new Zend_Acl_Resource('api-error'));
 		$this->add(new Zend_Acl_Resource('api-error-error'));
@@ -31,6 +33,7 @@ class App_Acl extends Zend_Acl
 		$this->allow('member','api-index');
 		$this->allow('member','api-boletos');
 		$this->allow('admin','api-index');
+		$this->allow('admin','api-usuarios');
 		$this->allow('admin','api-boletos');
 		
 		// Qg

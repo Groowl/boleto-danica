@@ -1,5 +1,4 @@
-﻿<?php 
-date_default_timezone_set('America/Sao_Paulo');
+﻿<?php date_default_timezone_set('America/Sao_Paulo');
 
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(dirname(__FILE__) . '/../library'),

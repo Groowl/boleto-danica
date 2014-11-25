@@ -16,6 +16,7 @@ $this->headMeta()->prependHttpEquiv('content-language',strtolower(str_replace('_
 
 $this->headScript()->appendFile($this->baseUrl('js/jquery.js'));
 $this->headScript()->appendFile($this->baseUrl('js/bootstrap.min.js'));
+$this->headScript()->appendFile($this->baseUrl('js/main.js'));
 // $this->headScript()->appendFile($this->baseUrl('scripts/library/jquery.animate.easing/jquery.easing.1.3.js'));
 // $this->headScript()->appendFile($this->baseUrl('scripts/library/jquery.masonry/jquery.masonry.min.js'));
 // $this->headScript()->appendFile($this->baseUrl('scripts/library/jquery.form.mask/jquery.meio.mask.min.js'));
@@ -66,15 +67,82 @@ $this->headLink()->appendStylesheet($this->baseUrl('css/main.css'),'screen');
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="/">Boletos</a></li>
 						<?php if ($tipo == 'admin'): ?>
-						<li><a href="#">Usuários</a></li>
+						<li><a href="/usuarios">Usuários</a></li>
 						<?php endif ?>
 						
-						<li><a href="#">Minha Conta</a></li>
+						<li>
+							<a href="#" data-toggle="modal" data-target="#modalUsuario">Minha Conta</a>
+							<!-- Modal -->
+							<?php $row = Zend_Auth::getInstance()->getIdentity(); ?>
+							<div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+						        	<form action="/usuarios/alterar-senha" class="form-usuario">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+							        <h4 class="modal-title" id="myModalLabel">Minha Conta</h4>
+							      </div>
+							      <div class="modal-body">
+									  <div class="form-group">
+									    <label for="">E-mail</label> <br>
+									    <code><?php echo $row->email ?></code>
+									    <input type="hidden" name="email" class="form-usuario-email" value="<?php echo $row->email ?>">
+									  </div>
+									  <div class="form-group">
+									    <label for="nome">Nome</label>
+									    <input type="text" class="form-control form-usuario-nome" name="nome" required placeholder="Nome" value="<?php echo $row->nome ?>">
+									  </div>
+									  <div class="form-group">
+									  	<div style="display: inline-block; width: 59%">
+										    <label for="nome">Cidade</label>
+										    <input type="text" class="form-control form-usuario-cidade" name="cidade" required placeholder="Cidade" value="<?php echo $row->cidade ?>">
+									    </div>
+									  	<div style="display: inline-block; width: 39%">
+										    <label for="estado">Estado</label>
+										    <input type="text" class="form-control form-usuario-estado" name="estado" required placeholder="Estado" value="<?php echo $row->estado ?>">
+									    </div>
+									  </div>
+									  <?php if ($row->tipo == 'admin'): ?>
+									  <div class="form-group">
+									    <label for="tipo">Tipo de usuário</label> <br>
+									    <select name="tipo" class="form-usuario-tipo">
+									    	<option value="member" <?php echo $row->tipo == 'member' ? 'selected' : '' ?>>Usuário</option>
+									    	<option value="admin" <?php echo $row->tipo == 'admin' ? 'selected' : '' ?>>Administrador</option>
+									    </select>
+									  </div>
+									  <?php endif ?>
+									  <div class="form-group">
+									    <label for="senha">Nova Senha</label>
+									    <input type="password" class="form-control form-usuario-senha"  name="senha" placeholder="Nova Senha">
+									  </div>
+									  <div class="form-group">
+									    <label for="nova-senha">Repita Nova Senha</label>
+									    <input type="password" class="form-control form-usuario-nova-senha"   name="nova-senha" placeholder="Repita Nova Senha">
+									  </div>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							        <button type="submit" class="btn btn-primary">Salvar</button>
+							      </div>
+									</form>
+							    </div>
+							  </div>
+							</div>
+						</li>
 						<li><a href="/sessao/logout">Sair</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
+		<?php if (Zend_Controller_Front::getInstance()->getRequest()->getParam('message') != ''): ?>
+			<div class="container">
+				<br>
+				<div class="alert alert-<?php echo Zend_Controller_Front::getInstance()->getRequest()->getParam('message-type'); ?> alert-dismissible fade in" role="alert">
+			      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+			      <?php echo Zend_Controller_Front::getInstance()->getRequest()->getParam('message'); ?>
+			    </div>
+			</div>
+		<?php endif ?>
 
 		<?php echo $this->layout()->content ?>
 

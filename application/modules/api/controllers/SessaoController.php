@@ -37,6 +37,8 @@ class SessaoController extends Zend_Controller_Action
 				if ($result->isValid()) {
 					$usuario = $authAdapter->getResultRowObject(null,'senha');
 					$usuario->tipo = $usuario->tipo;
+					$usuario->cidade = $usuario->cidade;
+					$usuario->estado = $usuario->estado;
 					$auth->getStorage()->write($usuario);
 
 					$this->getHelper('Redirector')

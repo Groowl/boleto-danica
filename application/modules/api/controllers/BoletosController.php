@@ -21,7 +21,7 @@ class BoletosController extends Zend_Controller_Action
 		$this->view->boleto = App_Db_Adapter::get()->fetchRow($query);
 
 		
-		$this->render('bradesco');	
+		$this->render('hsbc');	
 
 	}
 }
